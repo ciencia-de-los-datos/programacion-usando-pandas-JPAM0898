@@ -60,7 +60,7 @@ def pregunta_04():
     """
     _c1 = tbl0['_c1'] 
     _c2 = tbl0['_c2'] 
-    r = round(_c2.groupby(_c1).mean(),6)  
+    r = _c2.groupby(_c1).mean()
     return r
 
 def pregunta_05():
@@ -157,7 +157,7 @@ def pregunta_10():
     """
     _c1 = tbl0['_c1']
     _c2 = tbl0['_c2']
-    r = _c2.groupby(_c1).apply(lambda x: ':'.join(sorted(x.astype(str)))).reset_index(name='_c2')   
+    r = (_c2.groupby(_c1).apply(lambda x: ':'.join(sorted(x.astype(str)))).reset_index(name='_c2')).set_index('_c1')  
     return r
 
 def pregunta_11():
@@ -198,8 +198,7 @@ def pregunta_12():
     _c5 = _c5a + ':' + _c5b.astype(str)
     r = _c5.groupby(_c0).apply(lambda x: ','.join(sorted(x))).reset_index(name='_c5')
     return r
-    
-print(pregunta_12())
+
 def pregunta_13():
     """
     Si la columna _c0 es la clave en los archivos `tbl0.tsv` y `tbl2.tsv`, compute la suma de tbl2._c5b por cada valor en tbl0._c1.
